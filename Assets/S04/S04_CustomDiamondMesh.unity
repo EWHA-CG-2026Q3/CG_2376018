@@ -205,8 +205,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778718293}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0.01226455, y: 0.9616544, z: -0.043602098, w: -0.270498}
+  m_LocalPosition: {x: 1.9054058, y: 0.24496748, z: 2.8005357}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 1666173451}
   - component: {fileID: 1666173450}
   - component: {fileID: 1666173449}
+  - component: {fileID: 1666173452}
   m_Layer: 0
   m_Name: CustomDiamondMesh
   m_TagString: Untagged
@@ -346,6 +347,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1666173452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666173447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1189ef2cd2f414e459ad28f484c3dafe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::S04_CustomDiamondMesh
 --- !u!1 &1875535261
 GameObject:
   m_ObjectHideFlags: 0
