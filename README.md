@@ -17,6 +17,11 @@ Unity를 활용한 컴퓨터 그래픽스 수업 과제 저장소입니다.
 - `vertices`와 `triangles`를 직접 정의하여 Mesh 생성
 - 삼각형 인덱스를 이용한 다각형 구성
 
+### S04 - Custom Diamond Mesh
+- 6개의 정점과 8개의 삼각형을 이용한 다이아몬드 형태의 3D Mesh 제작
+- 위·아래 꼭짓점과 4개의 허리띠 정점을 연결하여 각 면 구성
+- 삼각형 인덱스와 winding order를 직접 설정하여 Mesh 생성
+
 ### S04_Abs - Custom Pyramid Mesh
 - 5개의 정점을 이용하여 사각뿔 제작
 - 밑면을 2개의 삼각형, 옆면을 4개의 삼각형으로 구성
