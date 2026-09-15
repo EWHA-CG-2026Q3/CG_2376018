@@ -26,3 +26,8 @@ Unity를 활용한 컴퓨터 그래픽스 수업 과제 저장소입니다.
 - 5개의 정점을 이용하여 사각뿔 제작
 - 밑면을 2개의 삼각형, 옆면을 4개의 삼각형으로 구성
 - Winding order에 따른 면의 방향 확인
+
+### S05 - Rasterization and Pixel Patterns
+- Texture2D와 RawImage를 이용한 픽셀 캔버스 생성
+- FillVerticalStripes를 이용한 세로 줄무늬 구현
+- FillCheckerboard를 이용한 체스판 무늬 구현
