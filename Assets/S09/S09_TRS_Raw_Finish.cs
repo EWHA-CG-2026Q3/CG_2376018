@@ -9,6 +9,7 @@ public class S09_TRS_Raw_Finish : MonoBehaviour
     [SerializeField] Vector3 t = new Vector3(3f, 0f, 0f);   // 이동 (Position)
     [SerializeField] float angle = 90f;                      // z축 회전 각도, 도 단위 (Rotation z)
     [SerializeField] Vector3 s = new Vector3(2f, 1f, 1f);    // 스케일 (Scale)
+    [SerializeField] float k = 1.8f;   // 학번 끝자리 8 → (8 + 1) / 5 = 1.8
 
     DiamondMesh diamondMesh;
 
@@ -21,7 +22,7 @@ public class S09_TRS_Raw_Finish : MonoBehaviour
     {
         if (diamondMesh == null || diamondMesh.BaseVertices == null) return;
 
-        Vector3[] verts = ApplyTRS_Raw(diamondMesh.BaseVertices, t, angle, s);
+        Vector3[] verts = ApplyShearRaw(diamondMesh.BaseVertices, k); 
         diamondMesh.SetVertices(verts);
     }
 
@@ -78,6 +79,16 @@ public class S09_TRS_Raw_Finish : MonoBehaviour
         };
     }
 
+    // 1열: e₁ 그대로 / 2열: e₂ → (k, 1, 0) / 3열: e₃ 그대로 / 4열: 원점 그대로
+    float[,] ShearMatrixRaw(float k)
+    {
+        return new float[,] {
+            { 1f,  k,  0f, 0f },
+            { 0f, 1f,  0f, 0f },
+            { 0f, 0f,  1f, 0f },
+            { 0f, 0f,  0f, 1f }
+        };
+    }
     // ---------- 동차좌표 ----------
 
     // 정점에 네 번째 성분 1을 붙임
@@ -103,7 +114,18 @@ public class S09_TRS_Raw_Finish : MonoBehaviour
         return new Vector4(result[0], result[1], result[2], result[3]);
     }
 
-    // ---------- 적용 ----------
+    // 모든 정점에 shear 적용
+    Vector3[] ApplyShearRaw(Vector3[] baseVertices, float k)
+    {
+        float[,] H = ShearMatrixRaw(k);
+        Vector3[] verts = new Vector3[baseVertices.Length];
+        for (int i = 0; i < baseVertices.Length; i++){
+            Vector4 h = ToHomogeneous(baseVertices[i]);
+            h = MultiplyMatrixVectorRaw(H, h);
+            verts[i] = FromHomogeneous(h);
+        }
+        return verts;
+    }
 
     // 모든 정점에 스케일 → 회전 → 이동을 차례로 적용
     Vector3[] ApplyTRS_Raw(Vector3[] baseVertices, Vector3 t, float angleDegrees, Vector3 s)
