@@ -64,7 +64,7 @@ public class S11_VirtualCamera_Finish : MonoBehaviour
     {
         Matrix4x4 Tinv = Matrix4x4.Translate(-cam.position);                  // T⁻¹: 이동을 되돌림
         Matrix4x4 Rinv = Matrix4x4.Rotate(Quaternion.Inverse(cam.rotation));  // R⁻¹: 회전을 되돌림
-        return Rinv * Tinv;                                                   // V = R⁻¹ × T⁻¹
+        return MultiplyMatrixMatrix(Rinv, Tinv);                                                  // V = R⁻¹ × T⁻¹
     }
 
     // 카메라(VirtualCamera)가 본 장면을 캔버스에 와이어프레임으로 그림 (매 프레임 호출)
@@ -78,15 +78,15 @@ public class S11_VirtualCamera_Finish : MonoBehaviour
         {
             if (mf == null || mf.sharedMesh == null) continue;    // 비어 있는 칸은 건너뜀
 
-            Matrix4x4 VM = V * mf.transform.localToWorldMatrix;   // V × M: 오브젝트를 기준으로 잰 점을 카메라를 기준으로 잰 점으로 바꾸는 행렬 (오브젝트마다 한 번)
+            Matrix4x4 VM = MultiplyMatrixMatrix(V, mf.transform.localToWorldMatrix);  // V × M: 오브젝트를 기준으로 잰 점을 카메라를 기준으로 잰 점으로 바꾸는 행렬 (오브젝트마다 한 번)
             Vector3[] verts = mf.sharedMesh.vertices;             // 오브젝트를 기준으로 잰 정점 배열
             int[] tris = mf.sharedMesh.triangles;                 // 정점 번호를 세 개씩 묶은 삼각형 목록
 
             for (int i = 0; i < tris.Length; i += 3)              // 삼각형마다 반복 (번호 세 개씩 건너뜀)
             {
-                Vector3 a = VM.MultiplyPoint(verts[tris[i]]);     // 삼각형의 첫째 정점을 카메라를 기준으로 잰 좌표로
-                Vector3 b = VM.MultiplyPoint(verts[tris[i + 1]]); // 둘째 정점
-                Vector3 c = VM.MultiplyPoint(verts[tris[i + 2]]); // 셋째 정점
+                Vector3 a = MultiplyMatrixVector(VM, verts[tris[i]]);
+                Vector3 b = MultiplyMatrixVector(VM, verts[tris[i + 1]]);
+                Vector3 c = MultiplyMatrixVector(VM, verts[tris[i + 2]]);
 
                 DrawEdge(a, b);                                   // 첫째와 둘째 정점을 잇는 변
                 DrawEdge(b, c);                                   // 둘째와 셋째 정점을 잇는 변
@@ -149,6 +149,37 @@ public class S11_VirtualCamera_Finish : MonoBehaviour
     {
         canvas.SetPixels(clearPixels);                            // 미리 만든 바탕색 배열로 한 번에 채움
     }
+    // 행렬과 점(벡터)을 직접 곱함
+Vector3 MultiplyMatrixVector(Matrix4x4 m, Vector3 v)
+{
+    Vector4 p = new Vector4(v.x, v.y, v.z, 1f);
+    Vector4 r = new Vector4(
+        m.m00 * p.x + m.m01 * p.y + m.m02 * p.z + m.m03 * p.w,
+        m.m10 * p.x + m.m11 * p.y + m.m12 * p.z + m.m13 * p.w,
+        m.m20 * p.x + m.m21 * p.y + m.m22 * p.z + m.m23 * p.w,
+        m.m30 * p.x + m.m31 * p.y + m.m32 * p.z + m.m33 * p.w
+    );
+    return new Vector3(r.x, r.y, r.z);
+}
+
+// 두 4×4 행렬을 직접 곱함
+Matrix4x4 MultiplyMatrixMatrix(Matrix4x4 a, Matrix4x4 b)
+{
+    Matrix4x4 r = new Matrix4x4();
+    for (int row = 0; row < 4; row++)
+    {
+        for (int col = 0; col < 4; col++)
+        {
+            float sum = 0f;
+
+            for (int k = 0; k < 4; k++)
+                sum += a[row, k] * b[k, col];
+
+            r[row, col] = sum;
+        }
+    }
+    return r;
+}
 
     // Scene 뷰에 VirtualCamera의 축 세 개와, 캔버스에 담기는 범위(상자)를 그림
     void OnDrawGizmos()
