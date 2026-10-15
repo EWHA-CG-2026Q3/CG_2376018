@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4f3449e64840a497a8f1c71cae41b4d3
+timeCreated: 1490273061
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 85680
+  packageName: Pavilion
+  packageVersion: 1.1
+  assetPath: Assets/IGBlocks/Pavilion/Prefabs/Pavilion.prefab
+  uploadId: 892842

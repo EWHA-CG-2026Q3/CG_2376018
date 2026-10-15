@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b94a8582078754efea43f7a21d790bdd
+timeCreated: 1490273117
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 85680
+  packageName: Pavilion
+  packageVersion: 1.1
+  assetPath: Assets/IGBlocks/Pavilion/Scenes/Pavilion.unity
+  uploadId: 892842

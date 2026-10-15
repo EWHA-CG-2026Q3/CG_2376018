@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f2a2ddfb777b94d03b3691e30a468779
+timeCreated: 1492614550
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 85680
+  packageName: Pavilion
+  packageVersion: 1.1
+  assetPath: Assets/IGBlocks/Pavilion/Models/Materials/Roof1.mat
+  uploadId: 892842
