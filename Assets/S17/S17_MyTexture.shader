@@ -35,7 +35,7 @@
                 //p = uv * 2;
                 //if (p.x > 1 || p.y > 1) return float4(0.8, 0.8, 0.8, 1);
 
-                p = uv * 0.15 + float2(0.5,0);
+                p = uv * 0.25 + float2(0.5,0);
                 return tex2D(_BaseMap, p);
             }
             ENDHLSL
