@@ -1,8 +1,4 @@
-﻿// DiamondMesh_Rewinded.cs
-// DiamondMesh.cs의 삼각형 감는 순서(와인딩 오더)를 바로잡은 버전.
-// 이 스크립트는 메시를 만들고 보관하는 역할만 함 — 이동/회전/스케일 계산은 별도 스크립트가 담당.
-// 머티리얼이 비어 있거나 분홍색(셰이더 오류)이면 URP Lit 머티리얼을 자동으로 붙임.
-using UnityEngine;
+﻿using UnityEngine;
 
 [ExecuteAlways]
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
