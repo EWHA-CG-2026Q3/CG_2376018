@@ -28,3 +28,8 @@ UserSettings/
 
 # OS generated files
 .DS_Store
+# S23: 과제에서 쓰지 않는 파일 (교수님 참고용 완성 씬, 텍스처 생성 코드)
+/Assets/S23_BilinearPatch/*_Finish.unity
+/Assets/S23_BilinearPatch/*_Finish.unity.meta
+/Assets/S23/Textures/make_leaf.py.txt
+/Assets/S23/Textures/make_leaf.py.txt.meta
